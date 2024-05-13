@@ -1,11 +1,15 @@
-import React , {useState}  from 'react';
+import React , {useState,useContext}  from 'react';
 import Navbar from './Components/Navbar/Navbar';
 import Buttonn from './Components/Buttonn';
 import Buttonnn from './Components/Buttonnn';
+import AppContext from './store/app-context';
+import LogIn from './Components/LogIn';
+import AppProvider from './store/AppProvider';
+import { useReducer } from 'react';
 const desc = "WELCOME TO MY APPLICATION";
 const text = "Click here!";
 const showDescription = false;
-const islogIn = false;
+// const islogIn = false;
 const getRandomNumber = () =>{
   return Math.floor(Math.random()*200);
 }
@@ -51,6 +55,8 @@ function LogInControl()
     setisloggedin(false);
   }
 
+  
+
   return(
     <div>
       {
@@ -60,9 +66,18 @@ function LogInControl()
   )
 }
 function App() {
+
+
+  // const[yesLoggedIn,setYesLoggedIn] = useState(false);
+  //const context = useContext(AppContext);//useContext will get the value from its provider and that provider should be there in the component above the comp in which useContext is there
+
+  
   
   const handleClick = () => alert("You Clicked me!!");
   console.log("App.js rendering");
+  // const handleLoggingIn=()=>{
+  //   setYesLoggedIn(true);
+  // }
   return (
     <div>
       {/* <Navbar isloggedin = {islogIn && 1}/> */}
@@ -94,8 +109,17 @@ function App() {
       <Buttonnn text={text}/>
   
       <Counter/>
-      <LogInControl/>
-    </div>  
+      <LogIn/>
+      {/* <AppContext.Provider value={{LoggedIn:yesLoggedIn,LoggingIn:handleLoggingIn}}>
+      <h1>helllo context</h1>
+     <LogIn/>
+      </AppContext.Provider> */}
+      {/* <h1>{context.message}</h1> */}
+      <AppProvider >
+      <h1>Hello from Context</h1>
+      <LogIn/>
+      </AppProvider>
+    </div>
   );
 }
 
